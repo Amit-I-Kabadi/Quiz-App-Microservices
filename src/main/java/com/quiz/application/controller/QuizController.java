@@ -2,6 +2,7 @@ package com.quiz.application.controller;
 
 import com.quiz.application.model.QuestionWrapper;
 import com.quiz.application.model.Questions;
+import com.quiz.application.model.Response;
 import com.quiz.application.service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,12 @@ public class QuizController {
     @GetMapping("/get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Long id ){
         return quizService.getQuizQuestions(id);
+    }
+
+    @PostMapping("/submit/{id}")
+    public ResponseEntity<?> submitQuiz(@PathVariable Long id,@RequestBody List<Response> response){
+        return quizService.calculateResult(id,response);
+
     }
 
 }

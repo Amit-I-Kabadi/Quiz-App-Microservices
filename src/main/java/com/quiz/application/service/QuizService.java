@@ -3,6 +3,7 @@ package com.quiz.application.service;
 import com.quiz.application.model.QuestionWrapper;
 import com.quiz.application.model.Questions;
 import com.quiz.application.model.Quiz;
+import com.quiz.application.model.Response;
 import com.quiz.application.repository.QuestionRepository;
 import com.quiz.application.repository.QuizRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,17 @@ public class QuizService {
             questionsForUser.add(qw);
         }
         return new ResponseEntity<>(questionsForUser,HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> calculateResult(Long id, List<Response> response) {
+        Quiz quiz=quizRepository.findById(id).get();
+        List<Questions> questions=quiz.getQuestions();
+        int right=0;
+        int i=0;
+        for(Response response1:response){
+            if (response1.getResponse().equals(questions.get(i).getRightAnswer())) right++;
+            i++;
+        }
+        return new ResponseEntity<>(right,HttpStatus.OK);
     }
 }
