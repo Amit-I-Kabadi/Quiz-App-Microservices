@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/quiz")
+@RequestMapping("/question")
 public class QuestionController {
 
     private final QuestionService questionService;

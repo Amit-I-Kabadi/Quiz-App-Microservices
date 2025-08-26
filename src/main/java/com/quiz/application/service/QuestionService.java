@@ -39,7 +39,7 @@ public class QuestionService {
     }
 
     public void deleteById(Long id) {
-        Questions existingQuestion=questionRepository.findById(id).orElseThrow(()-> new RuntimeException("Resourse Not found with this id"+id));
+        Questions existingQuestion=questionRepository.findById(id).orElseThrow(()-> new RuntimeException("Resource Not found with this id"+id));
         questionRepository.deleteById(existingQuestion.getId());
 
     }
